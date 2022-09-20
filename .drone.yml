@@ -39,24 +39,24 @@ steps:
 - name: build-image
   <<: *x-build-docker-image
   settings:
-    repo: kunal0929/ci-cd-demo
+    repo: Kunal0323/ci-cd-demo
     dockerfile: code/Dockerfile
     context: code
   depends_on:
     - test
-- name: update-manifests
-  pull: if-not-exists
-  image: kunal0929/update-kustomization:v1.1.2
-  environment:
-    IMAGES: Kunal0323/ci-cd-demo
-    IMAGE_TAG: ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}
-    MANIFEST_HOST: github.com
-    MANIFEST_USER: Kunal0323
-    MANIFEST_USER_EMAIL: kunal.bhardwaj@mxplayer.in
-    MANIFEST_REPO: cicd-demo-manifests
-    MANIFEST_BRANCH: main
-    KUSTOMIZATION: production
-  depends_on:
-    - build-image
-  when:
-    event: push
+# - name: update-manifests
+#   pull: if-not-exists
+#   image: kunal0929/update-kustomization:v1.1.2
+#   environment:
+#     IMAGES: Kunal0323/ci-cd-demo
+#     IMAGE_TAG: ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}
+#     MANIFEST_HOST: github.com
+#     MANIFEST_USER: Kunal0323
+#     MANIFEST_USER_EMAIL: kunal.bhardwaj@mxplayer.in
+#     MANIFEST_REPO: cicd-demo-manifests
+#     MANIFEST_BRANCH: main
+#     KUSTOMIZATION: production
+#   depends_on:
+#     - build-image
+#   when:
+#     event: push
