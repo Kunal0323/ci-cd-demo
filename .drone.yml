@@ -39,7 +39,7 @@ steps:
 - name: build-image
   <<: *x-build-docker-image
   settings:
-    repo: Kunal0323/ci-cd-demo
+    repo: kunal0929/ci-cd-demo
     dockerfile: code/Dockerfile
     context: code
   depends_on:
