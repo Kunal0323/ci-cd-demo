@@ -1,0 +1,64 @@
+kind: pipeline
+type: docker
+name: add-server-ci
+
+platform:
+  os: linux
+  arch: amd64
+
+x-build-docker-image: &x-build-docker-image
+  image: plugins/docker
+  settings:
+    custom_labels:
+    - 'BUILD_NUMBER=${DRONE_BUILD_NUMBER}'
+    - 'BUILD_SHA=${DRONE_COMMIT_SHA}'
+    tags:
+      - ${DRONE_COMMIT_SHA}
+      - latest
+    username:
+      from_secret: u_docker
+    password:
+      from_secret: p_docker
+
+trigger:
+  branch:
+  - main
+  event:
+    include:
+    - push
+    - pull_request
+
+steps:
+- name: test
+  pull: if-not-exists
+  image: golang:1.15.2
+  commands:
+  - cd src
+  - go mod download
+  - go test -v ./...
+- name: build-image
+  <<: *x-build-docker-image
+  settings:
+    repo: Kunal0323/Ci-Cd-Demo
+    dockerfile: code/Dockerfile
+    context: code
+  depends_on:
+    - test
+- name: update-manifests
+  pull: if-not-exists
+  image: Kunal0323/update-kustomization:v1.1.2
+  environment:
+    SSH_KEY:
+      from_secret: ssh_key
+    IMAGES: Kunal0323/Ci-Cd-Demo
+    IMAGE_TAG: ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}
+    MANIFEST_HOST: github.com
+    MANIFEST_USER: Kunal0323
+    MANIFEST_USER_EMAIL: kunal.bhardwaj@mxplayer.in
+    MANIFEST_REPO: cicd-demo-manifests
+    MANIFEST_BRANCH: main
+    KUSTOMIZATION: production
+  depends_on:
+    - build-image
+  when:
+    event: push
