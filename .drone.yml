@@ -44,7 +44,7 @@ steps:
     - test
 - name: update-manifests
   pull: if-not-exists
-  image: kunal0929/update-kustomization:v1.1.2
+  image: Kunal0323/update-kustomization:v1.1.2
   environment:
     IMAGES: kunal0929/ci-cd-demo
     IMAGE_TAG: ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}
