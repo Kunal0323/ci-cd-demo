@@ -33,7 +33,7 @@ steps:
   pull: if-not-exists
   image: golang:1.15.2
   commands:
-  - cd src
+  - cd code
   - go mod download
   - go test -v ./...
 - name: build-image
