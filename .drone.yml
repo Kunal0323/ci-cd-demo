@@ -39,14 +39,14 @@ steps:
 - name: build-image
   <<: *x-build-docker-image
   settings:
-    repo: Kunal0323/ci-cd-demo
+    repo: kunal0929/ci-cd-demo
     dockerfile: code/Dockerfile
     context: code
   depends_on:
     - test
 - name: update-manifests
   pull: if-not-exists
-  image: Kunal0323/update-kustomization:v1.1.2
+  image: kunal0929/update-kustomization:v1.1.2
   environment:
     IMAGES: Kunal0323/ci-cd-demo
     IMAGE_TAG: ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}
