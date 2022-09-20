@@ -19,15 +19,9 @@ x-build-docker-image: &x-build-docker-image
       from_secret: u_docker
     password:
       from_secret: p_docker
-
 trigger:
   branch:
   - main
-  event:
-    include:
-    - push
-    - pull_request
-
 steps:
 - name: test
   pull: if-not-exists
