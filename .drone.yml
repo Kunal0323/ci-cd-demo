@@ -20,13 +20,13 @@ x-build-docker-image: &x-build-docker-image
     password:
       from_secret: p_docker
 
-trigger:
-  branch:
-  - main
-  event:
-    include:
-    - push
-    - pull_request
+# trigger:
+#   branch:
+#   - main
+#   event:
+#     include:
+#     - push
+#     - pull_request
 
 steps:
 - name: test
