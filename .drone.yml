@@ -22,6 +22,10 @@ x-build-docker-image: &x-build-docker-image
 trigger:
   branch:
   - main
+  event:
+    include:
+      - push
+      - pull_request
 steps:
 - name: test
   pull: if-not-exists
