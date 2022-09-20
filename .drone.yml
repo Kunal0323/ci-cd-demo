@@ -48,7 +48,7 @@ steps:
   pull: if-not-exists
   image: Kunal0323/update-kustomization:v1.1.2
   environment:
-    IMAGES: Kunal0323/Ci-Cd-Demo
+    IMAGES: Kunal0323/ci-cd-demo
     IMAGE_TAG: ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}
     MANIFEST_HOST: github.com
     MANIFEST_USER: Kunal0323
