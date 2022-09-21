@@ -44,7 +44,7 @@ steps:
     - test
 - name: update-manifests
   pull: if-not-exists
-  image: line/kubectl-kustomize:1.25.1-4.5.7
+  image: line/kubectl-kustomize:latest
   environment:
     IMAGES: kunal0929/ci-cd-demo
     IMAGE_TAG: ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}
