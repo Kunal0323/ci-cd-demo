@@ -53,7 +53,7 @@ steps:
     MANIFEST_USER_EMAIL: kunal.bhardwaj@mxplayer.in
     MANIFEST_REPO: cicd-demo-manifests
     MANIFEST_BRANCH: main
-    KUSTOMIZATION: dev
+    KUSTOMIZATION: production
   depends_on:
     - build-image
   when:
