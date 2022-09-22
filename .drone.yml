@@ -1,7 +1,14 @@
 kind: pipeline
 type: docker
 name: add-server-ci
-
+commands:
+      - cat /root/.netrc
+      - touch foo.txt
+      - git add .
+      - git config --global user.email "kunal.bhardwaj@mxplayer.in"
+      - git config --global user.name "Kunal0323"
+      - git commit -m "added file [ci skip]"
+      - git push origin master
 platform:
   os: linux
   arch: amd64
